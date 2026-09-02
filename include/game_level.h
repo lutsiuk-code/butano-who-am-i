@@ -20,7 +20,6 @@ class map {
         // bn::string<32> map_id;
         bn::regular_bg_item curr_map;
         bn::regular_bg_tiles_item tiles;
-        // bn::bg_palette_item pal_item;
         bn::regular_bg_map_item map_item;
         bn::regular_bg_ptr map_ptr;
 
