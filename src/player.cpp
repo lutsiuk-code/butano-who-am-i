@@ -3,14 +3,16 @@
 #include "bn_span.h"
 #include "bn_log.h"
 #include "bn_point.h"
-#include "bn_regular_bg_map_cell_info.h"
+// #include "bn_regular_bg_map_cell_info.h"
 #include "bn_sprite_items_connie_sprites.h"
+#include "collision_check.h"
 
 // GBA Buttons shortcuts
 bn::keypad::key_type UP = bn::keypad::key_type::UP;
 bn::keypad::key_type RIGHT = bn::keypad::key_type::RIGHT;
 bn::keypad::key_type DOWN = bn::keypad::key_type::DOWN;
 bn::keypad::key_type LEFT = bn::keypad::key_type::LEFT;
+
 
 // Initialization list
 player::player(map map_obj) :
@@ -76,30 +78,24 @@ void player::change_direction(direction dir) {
     }
 }
 
-bn::point playerPos(64, 64);
-
 // Update handler
 void player::update() {
     // Player movement
 
-    if (bn::keypad::held(UP)) {
+    if (bn::keypad::held(UP) && can_move_to(level_info, getPosX(), getPosY() - 4)) {
         setPosY(getPosY() - 1);
-        // playerPos.set_y(playerPos.y() - 1);
         change_direction(direction::BACK);
         isMoving = true;
-    } else if (bn::keypad::held(DOWN)) {
+    } else if (bn::keypad::held(DOWN) && can_move_to(level_info, getPosX(), getPosY() + 4)) {
         setPosY(getPosY() + 1);
-        // playerPos.set_y(playerPos.y() + 1);
         change_direction(direction::FORWARD);
         isMoving = true;
-    } else if (bn::keypad::held(RIGHT)) {
+    } else if (bn::keypad::held(RIGHT) && can_move_to(level_info, getPosX() + 4, getPosY())) {
         setPosX(getPosX() + 1);
-        // playerPos.set_x(playerPos.x() + 1);
         change_direction(direction::RIGHT);
         isMoving = true;
-    } else if (bn::keypad::held(LEFT)) {
+    } else if (bn::keypad::held(LEFT) && can_move_to(level_info, getPosX() - 4, getPosY())) {
         setPosX(getPosX() - 1);
-        // playerPos.set_x(playerPos.x() - 1);
         change_direction(direction::LEFT);
         isMoving = true;
     } else {
