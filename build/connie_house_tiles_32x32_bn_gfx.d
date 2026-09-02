@@ -1,1 +1,0 @@
-connie_house_tiles_32x32_bn_gfx.o: connie_house_tiles_32x32_bn_gfx.s
