@@ -19,14 +19,10 @@ int main()
     // ================= SETTING UP THE MANAGERS/INSTANCES =================
 
     // Create level manager instance
-    map _map;
+    map _map(bn::regular_bg_items::room);
 
     // Create player object
     player connie(_map);
-
-    // Create camera instance
-    cameraObj camInstance;
-    camera = &camInstance;
 
     // Assing camera to background
     _map.map_ptr.set_camera(connie.cameraPtr);
@@ -37,7 +33,7 @@ int main()
     bn::vector<bn::sprite_ptr, 32> empty;
 
     // ================= SETTING UP INITIAL VALUES AND STATES =================
-    text_gen.set_left_alignment();
+    text_gen.set_center_alignment();
 
     while(true)
     {
@@ -45,7 +41,7 @@ int main()
         connie.update();
 
         text_sprites = empty;
-        text_gen.generate(-60, 
+        text_gen.generate(0, 
             60, 
             bn::string<32>("X: ") + bn::to_string<32>(connie.getPosX().integer())
             + " " +

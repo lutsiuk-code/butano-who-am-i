@@ -5,11 +5,11 @@ constexpr int PLAYER_HITBOX_W = 6;
 constexpr int PLAYER_HITBOX_H = 6;
 
 bool is_wall(int tile_index) {
-    return tile_index == 0 || tile_index == 3 || tile_index == 7 || tile_index == 33;
+    return tile_index == 0 || tile_index == 5 || tile_index == 9 || tile_index == 38;
 }
 
 bool is_door(int tile_index) {
-    return tile_index == 28;
+    return tile_index == 33;
 }
 
 bool is_solid_at(map& level, bn::fixed world_x, bn::fixed world_y) {

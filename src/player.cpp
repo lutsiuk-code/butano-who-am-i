@@ -3,9 +3,9 @@
 #include "bn_span.h"
 #include "bn_log.h"
 #include "bn_point.h"
-// #include "bn_regular_bg_map_cell_info.h"
 #include "bn_sprite_items_connie_sprites.h"
 #include "collision_check.h"
+#include "game_level.h"
 
 // GBA Buttons shortcuts
 bn::keypad::key_type UP = bn::keypad::key_type::UP;
@@ -15,7 +15,7 @@ bn::keypad::key_type LEFT = bn::keypad::key_type::LEFT;
 
 
 // Initialization list
-player::player(map map_obj) :
+player::player(map& map_obj) :
     sprite(bn::sprite_items::connie_sprites),
     spritePtr(sprite.create_sprite(0)),
     current_dir(direction::FORWARD),
@@ -112,6 +112,14 @@ void player::update() {
         anim_action.update();
     } else {
         anim_action.set_current_index(1);
+    }
+
+    if(is_door_at(level_info, getPosX(), getPosY())) {
+        level_info.change_lvl(bn::regular_bg_items::hallway);
+        level_info.map_ptr.set_camera(cameraPtr);
+
+        setPosX(0);
+        setPosY(30);
     }
 
     // BN_LOG("X: ", getPosX().integer(), " Y: ", getPosY().integer(), " TILE: ", bn::regular_bg_map_cell_info(level_info.map_item.cell(getPosX().integer(), getPosY().integer())).tile_index());

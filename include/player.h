@@ -21,12 +21,12 @@ class player {
 
         bn::sprite_animate_action<4> anim_action;
 
-        map level_info;
+        map& level_info;
 
         void change_direction(direction dir);
 
     public:
-        player(map map_obj);
+        player(map& map_obj);
 
         bn::camera_ptr cameraPtr;
 
