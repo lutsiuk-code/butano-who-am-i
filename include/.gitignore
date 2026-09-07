@@ -1,9 +1,0 @@
-../graphics/
-../dmg_audio/
-../build/
-../audio/
-../.vscode/
-
-*.elf
-*.gba
-*.sav

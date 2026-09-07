@@ -9,6 +9,7 @@ namespace game_levels {
         connie_house_parents_room = 3
     };
 
+    
     enum school {
         school_hallway1 = 0,
         school_hallway2 = 1,
