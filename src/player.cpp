@@ -115,11 +115,11 @@ void player::update() {
     }
 
     if(is_door_at(level_info, getPosX(), getPosY())) {
-        level_info.change_lvl(bn::regular_bg_items::hallway);
-        level_info.map_ptr.set_camera(cameraPtr);
+        level_info.change_lvl(bn::regular_bg_items::connie_house, bn::point(getPosX().integer(), getPosY().integer()));
+        level_info.bg_ptr.set_camera(cameraPtr);
 
         setPosX(0);
-        setPosY(30);
+        setPosY(0);
     }
 
     // BN_LOG("X: ", getPosX().integer(), " Y: ", getPosY().integer(), " TILE: ", bn::regular_bg_map_cell_info(level_info.map_item.cell(getPosX().integer(), getPosY().integer())).tile_index());
