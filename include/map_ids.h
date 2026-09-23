@@ -1,3 +1,4 @@
+#pragma once
 #ifndef MAP_IDS_H
 #define MAP_IDS_H
 

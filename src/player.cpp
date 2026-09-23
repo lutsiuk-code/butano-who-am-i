@@ -6,6 +6,8 @@
 #include "bn_sprite_items_connie_sprites.h"
 #include "collision_check.h"
 #include "game_level.h"
+#include "timer.h"
+#include "screen_fade.h"
 
 // GBA Buttons shortcuts
 bn::keypad::key_type UP = bn::keypad::key_type::UP;
@@ -114,30 +116,30 @@ void player::update() {
         anim_action.set_current_index(1);
     }
 
+    // is_door_at(level_info, getPosX(), getPosY());
+
+    bn::point debug_tile = world_to_tile(level_info, getPosX(), getPosY());
+    BN_LOG(debug_tile.x(), " ", debug_tile.y());
+
     if(is_door_at(level_info, getPosX(), getPosY())) {
-        level_info.change_lvl(bn::regular_bg_items::connie_house, bn::point(getPosX().integer(), getPosY().integer()));
+        fade(60, 1);
+
+        // timer(60);
+
+        bn::array<int,4> next_lvl_info = get_next_lvl(level_info, getPosX().integer(), getPosY().integer());
+        level_info.change_lvl(next_lvl_info[0]);
         level_info.bg_ptr.set_camera(cameraPtr);
 
-        setPosX(0);
-        setPosY(0);
+        setPosX(next_lvl_info[1]);
+        setCamX(getPosX());
+        setPosY(next_lvl_info[2]);
+        setCamY(getPosY());
+
+        timer(60);
+
+        fade(60, 0);
     }
-
-    // BN_LOG("X: ", getPosX().integer(), " Y: ", getPosY().integer(), " TILE: ", bn::regular_bg_map_cell_info(level_info.map_item.cell(getPosX().integer(), getPosY().integer())).tile_index());
-
-    // bn::fixed playerX = ((playerPos.x() * 2) - 128)/2;
-    // bn::fixed playerY = ((playerPos.y() * 2) - 128)/2;
-
-    // setPosX(playerX);
-    // setPosY(playerY);
-
-    // if (getPosY().integer() < getCamY().integer() - 20 && isMoving ) {
-        // setCamY(getCamY() - 1);
-    // }
 
     setCamY(getPosY());
     setCamX(getPosX());
-
-    // Debug info
-    // BN_LOG("X: ", getPosX(), " Y: ", getPosY());
-    // BN_LOG("CAM X: ", getCamX(), " CAM Y: ", getCamY().integer());
 }

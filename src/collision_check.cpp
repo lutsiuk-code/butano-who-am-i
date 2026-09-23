@@ -1,4 +1,5 @@
 #include "collision_check.h"
+#include "bn_log.h"
 
 constexpr int TILE_SIZE = 8;
 constexpr int PLAYER_HITBOX_W = 6;
@@ -32,7 +33,7 @@ bool is_solid_at(map& level, bn::fixed world_x, bn::fixed world_y) {
     return is_wall(tile_index);
 }
 
-bn::point is_door_at(map& level, bn::fixed world_x, bn::fixed world_y) {
+bool is_door_at(map& level, bn::fixed world_x, bn::fixed world_y) {
     auto dim = level.map_item.dimensions(); // map size in 8x8 tiles
 
     int map_w_px = dim.width() * TILE_SIZE;
@@ -44,12 +45,7 @@ bn::point is_door_at(map& level, bn::fixed world_x, bn::fixed world_y) {
     bn::regular_bg_map_cell cell = level.map_item.cell(level.bg_index, px / TILE_SIZE, py / TILE_SIZE);
     int tile_index = bn::regular_bg_map_cell_info(cell).tile_index();
 
-    // switch(is_door(tile_index)) {
-    //     case true:
-
-    //         break;
-    // }
-    // return is_door(tile_index);
+    return is_door(tile_index);
 }
 
 bool can_move_to(map& level, bn::fixed x, bn::fixed y)

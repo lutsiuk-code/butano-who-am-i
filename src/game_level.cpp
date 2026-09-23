@@ -12,8 +12,13 @@ map::map(bn::regular_bg_item level) :
 
 }
 
-void map::change_lvl(bn::regular_bg_item level, bn::point plr_pos) {
+void map::change_lvl(int next_lvl_index) {
+
+    // bn::array<int, 4> next_lvl_info = get_next_lvl(map::bg_index, plr_pos.x(), plr_pos.y());
+    // map::bg_index = next_lvl_info[0];
+
+
     // map::curr_map = level;
-    map::bg_index = get_next_lvl(map::bg_index, plr_pos);
+    map::bg_index = next_lvl_index;
     map::bg_ptr = curr_map.create_bg(map::bg_index);
 }

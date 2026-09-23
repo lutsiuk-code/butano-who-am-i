@@ -1,3 +1,4 @@
+#pragma once
 #ifndef GAME_LEVEL_H
 #define GAME_LEVEL_H
 
@@ -26,7 +27,7 @@ class map {
         bn::regular_bg_ptr bg_ptr;
         bn::regular_bg_map_item map_item;
 
-        void change_lvl(bn::regular_bg_item level, bn::point plr_pos);
+        void change_lvl(int next_lvl_index);
 
 };
 
