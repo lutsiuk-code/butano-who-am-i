@@ -38,23 +38,16 @@ namespace menu_loop {
         main_theme.play(0, true);
 
         text_gen.set_center_alignment();
-        // text_gen.set_blending_enabled(true);
 
         bool start_hint_is_shown = false;
         bool start_button_pressed = false;
         bool transition_to_next_screen = false;
         bool transition_to_main_loop = false;
 
-        // text_gen.generate(0, -15, "WHAT AM I?", text_sprites);
-
         bn::bg_palettes::set_fade_color(bn::colors::black);
         bn::bg_palettes::set_fade_intensity(1);
 
         bn::sprite_palettes::set_fade_color(bn::colors::black);
-        // bn::sprite_palettes::set_fade_intensity(1);
-
-        // bn::blending::set_black_fade_color();
-        // bn::blending::set_fade_alpha(1);
 
         bn::optional<bn::sprite_palettes_fade_to_action> spr_transition;
         spr_transition.emplace(120, 0);
@@ -83,7 +76,6 @@ namespace menu_loop {
                     }
                 } else if (spr_transition->done() && start_button_pressed && !transition_to_next_screen) {
                     BN_LOG("GOING TO NEXT SCREEN");
-                    // timer(120);
                     text_gen.set_blending_enabled(false);
                     transition_to_next_screen = true;
                 }
@@ -116,14 +108,8 @@ namespace core_loop {
         // Assing camera to background
         _map.bg_ptr.set_camera(connie.cameraPtr);
 
-        // bn::bg_palettes::set_fade_color(bn::colors::black);
-        // bn::sprite_palettes::set_fade_color(bn::colors::black);
-
         bn::bg_palettes::set_fade_intensity(1);
         bn::sprite_palettes::set_fade_intensity(1);
-
-        // bn::bg_palettes_fade_to_action bg_fade_in(120, 0);
-        // bn::sprite_palettes_fade_to_action spr_fade_in(120, 0);
 
         bool fade_in_finished = false;
 
@@ -167,53 +153,3 @@ int main()
     BN_LOG("EXIT INITIATED");
     return 1;
 }
-
-// int main()
-// {
-    // bn::core::init();
-    // // bn::core::set_skip_frames(1);
-
-    // BN_LOG("GAME INIT. HELLO, WORLD!");
-
-    // // ================= SETTING UP THE MANAGERS/INSTANCES =================
-
-    // // Create instance that tracks game states
-    // game_states* gameStates = nullptr;
-
-    // // Create level manager instance
-    // map _map(bn::regular_bg_items::connie_house);
-
-    // BN_LOG(_map.map_item.dimensions().height(), " ", _map.map_item.dimensions().width());
-
-    // // Create player object
-    // player connie(_map);
-
-    // // Assing camera to background
-    // _map.bg_ptr.set_camera(connie.cameraPtr);
-
-    // // Create text generator instance
-    // bn::sprite_text_generator text_gen(common::fixed_8x8_sprite_font);
-    // bn::vector<bn::sprite_ptr, 128> text_sprites;
-    // bn::vector<bn::sprite_ptr, 1> empty;
-
-    // // ================= SETTING UP INITIAL VALUES AND STATES =================
-    // text_gen.set_center_alignment();
-
-    // while(true)
-    // {
-    //     connie.update();
-
-    //     text_sprites = empty;
-    //     text_gen.generate(0, 
-    //         60, 
-    //         bn::string<64>("X: ") + bn::to_string<64>(connie.getPosX().integer())
-    //         + " " +
-    //         bn::string<64>("Y: ") + bn::to_string<64>(connie.getPosY().integer())
-    //         + " " +
-    //         bn::string<64>("ID: ") + bn::to_string<64>(_map.bg_index),
-    //         text_sprites);
-
-    //     BN_LOG(bn::core::current_cpu_usage());
-    //     bn::core::update();
-    // }
-// }
